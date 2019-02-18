@@ -1,0 +1,13 @@
+if [ "`git status -s`" != "" ]; then
+  echo "Cannot deploy! You have changes not committed"
+  exit -1
+fi
+
+echo ' *** Git PULL *** '
+git pull
+
+echo ' *** Stop API Server *** '
+docker stop api_server
+
+echo ' *** Starting Worker *** '
+docker-compose up --build -d 
