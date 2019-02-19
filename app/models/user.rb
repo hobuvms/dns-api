@@ -22,8 +22,17 @@ class User < ApplicationRecord
     self.verification_token = generate_token
   end
 
+  after_create do
+    update_attributes(referral: generate_referral)
+  end
+
   enum gender: %i[female male]
   enum role: { user: 100, vendor: 200, admin: 500 }
+
+
+  def generate_referral
+    email.split(/\W+/).first + id.to_s
+  end
 
   def area_of_services_attributes=(area_of_services_attributes)
     area_of_services.destroy_all
@@ -34,7 +43,7 @@ class User < ApplicationRecord
   end
 
   def as_object
-    as_json(only: %i[id username first_name last_name email dob gender phone first_name bio],
+    as_json(only: %i[id username first_name last_name email dob gender phone first_name bio referral],
             methods: %i[completed? image_url],
             include: [:area_of_services,
                       vendor_detail: { only: %i[unit area city province postal_code pitch

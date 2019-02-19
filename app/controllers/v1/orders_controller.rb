@@ -22,7 +22,8 @@ module V1
         current_user.password = rand(36**20).to_s(36)
         current_user.save
       end
-      @order = Order.new(order_params.merge(user_uuid: current_user.uuid))
+
+      @order = Order.new(order_params.merge(user_uuid: current_user.uuid, vendor_uuid: find_vendor(params[:referral])))
 
       if @order.save
         render_json(@order.object)
@@ -32,11 +33,17 @@ module V1
     end
 
     def order_params
-      params.permit(:listing_id, :total, :slot, :scheduled_at,
+      params.permit(:listing_id, :total, :slot, :scheduled_at, :referral,
                       order_detail_attributes: %i[per_hour_cost duration],
                       customer_address_attributes: %i[latitude longitude full_address phone],
                       order_attributes_attributes: [:listing_attribute_id, :value]
                       )
+    end
+
+    def find_vendor(referral)
+      user = User.find_by_referral(referral)
+      return nil if referral.nil? || user.blank?
+      user.referral
     end
   end
 end
