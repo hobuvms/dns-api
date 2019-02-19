@@ -1,8 +1,3 @@
-if [ "`git status -s`" != "" ]; then
-  echo "Cannot deploy! You have changes not committed"
-  exit -1
-fi
-
 echo ' *** Git PULL *** '
 git pull
 
