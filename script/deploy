@@ -1,8 +1,0 @@
-echo ' *** Git PULL *** '
-git pull
-
-echo ' *** Stop API Server *** '
-docker stop api_server
-
-echo ' *** Starting Worker *** '
-docker-compose up --build -d 
