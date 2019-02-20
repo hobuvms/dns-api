@@ -1,0 +1,372 @@
+  [1m[35m (0.5ms)[0m  [1m[35mSET  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[36mUser Load (25.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@/sdfcmo/' LIMIT 1[0m
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@amar.com' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `password_digest`, `created_at`, `updated_at`) VALUES ('amar@amar.com', '$2a$10$sNqpMzmcpgYCojFg6Q/XduHFKYAU29nfSnfVCv/RjBc9MDuJQzLuO', '2019-02-20 17:34:13', '2019-02-20 17:34:13')[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@amar.com' LIMIT 1[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@amar.com' LIMIT 1[0m
+  [1m[35m (1.7ms)[0m  [1m[35mSET  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT  `users`.* FROM `users` ORDER BY `users`.`id` ASC LIMIT 1[0m
+Started POST "/users/register?email=amar@amar.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 00:43:41 +0700
+  [1m[35m (0.4ms)[0m  [1m[35mSET  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.`version` FROM `schema_migrations` ORDER BY `schema_migrations`.`version` ASC[0m
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@amar.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `password_digest`, `created_at`, `updated_at`) VALUES ('amar@amar.com', '$2a$10$RxNtbeRxS4.SBk93yg9rEu8yY9WhQlsmSCyoTgmEBnQfb8lgIczp2', '2019-02-20 17:43:41', '2019-02-20 17:43:41')[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@amar.com' LIMIT 1[0m
+Completed 500 Internal Server Error in 190ms (ActiveRecord: 21.3ms)
+
+
+  
+NoMethodError (undefined method `[]' for nil:NilClass):
+  
+app/controllers/users_controller.rb:73:in `parse_user_detail'
+app/controllers/users_controller.rb:28:in `register'
+Started POST "/users/register?email=amar@amar.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 00:43:46 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@amar.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.3ms)[0m  [1m[35mSET  @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ',STRICT_ALL_TABLES'), ',NO_AUTO_VALUE_ON_ZERO'),  @@SESSION.sql_auto_is_null = 0, @@SESSION.wait_timeout = 2147483[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO `users` (`email`, `password_digest`, `created_at`, `updated_at`) VALUES ('amar@amar.com', '$2a$10$3RsLzwMYGDd5a8dvPCruwuW/sUeU0HscilNJTuni2r1TUILK2SHvq', '2019-02-20 17:43:46', '2019-02-20 17:43:46')[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@amar.com' LIMIT 1[0m
+Completed 500 Internal Server Error in 168ms (ActiveRecord: 3.6ms)
+
+
+  
+NoMethodError (undefined method `[]' for nil:NilClass):
+  
+app/controllers/users_controller.rb:73:in `parse_user_detail'
+app/controllers/users_controller.rb:28:in `register'
+Started POST "/users/register?email=amar@amar.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 00:44:50 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@amar.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (22.6ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@amar.com' LIMIT 1[0m
+  [1m[35m (0.5ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 199ms (ActiveRecord: 23.4ms)
+
+
+  
+NoMethodError (undefined method `render_json' for #<UsersController:0x007fb4072849d0>
+Did you mean?  render):
+  
+app/controllers/users_controller.rb:31:in `register'
+Started POST "/users/register?email=amar@amar.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 00:47:45 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@amar.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@amar.com' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 108ms (Views: 0.5ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/users/register?email=amar@amar.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 00:48:00 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@amar.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@amar.com' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 99ms (ActiveRecord: 1.1ms)
+
+
+  
+ArgumentError (wrong number of arguments (given 0, expected 2)):
+  
+app/controllers/users_controller.rb:31:in `register'
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@amar.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+Started POST "/users/register?email=amar@amar.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 00:48:58 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@amar.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@amar.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 90ms (Views: 0.2ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/users/register?email=amar@amar.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 00:49:08 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@amar.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@amar.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 118ms (Views: 0.2ms | ActiveRecord: 0.9ms)
+
+
+Started POST "/users/register?email=amar@amar.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 00:49:12 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@amar.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@amar.com' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 104ms (Views: 0.2ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/users/register?email=amar@amar1.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 00:50:05 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@amar1.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@amar1.com' LIMIT 1[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO `users` (`email`, `password_digest`, `created_at`, `updated_at`) VALUES ('amar@amar1.com', '$2a$10$OJ3TylWC8tbO8TenemJYZeXN3QnmpJaZ4k0iHw0ifgXEc8194lLvi', '2019-02-20 17:50:05', '2019-02-20 17:50:05')[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@amar1.com' LIMIT 1[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@amar1.com' LIMIT 1[0m  [["email", "amar@amar1.com"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 259ms (ActiveRecord: 2.7ms)
+
+
+  
+TypeError (no implicit conversion of Symbol into Integer):
+  
+app/controllers/users_controller.rb:73:in `[]'
+app/controllers/users_controller.rb:73:in `parse_user_detail'
+app/controllers/users_controller.rb:28:in `register'
+Started POST "/users/register?email=amar@amar1.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 00:50:27 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@amar1.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@amar1.com' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 120ms (Views: 0.2ms | ActiveRecord: 6.4ms)
+
+
+Started POST "/users/register?email=amar@ama1r1.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 00:50:37 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@ama1r1.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@ama1r1.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `password_digest`, `created_at`, `updated_at`) VALUES ('amar@ama1r1.com', '$2a$10$CMNZeFWOAinlgJO3PRT.COBjI3EpOhYUxOGv5Jfy.o7ykPofC01KW', '2019-02-20 17:50:37', '2019-02-20 17:50:37')[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@ama1r1.com' LIMIT 1[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@ama1r1.com' LIMIT 1[0m  [["email", "amar@ama1r1.com"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 254ms (ActiveRecord: 3.3ms)
+
+
+  
+TypeError (no implicit conversion of Symbol into Integer):
+  
+app/controllers/users_controller.rb:74:in `[]'
+app/controllers/users_controller.rb:74:in `parse_user_detail'
+app/controllers/users_controller.rb:29:in `register'
+Started POST "/users/register?email=amar@ama1r1.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 00:50:59 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@ama1r1.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@ama1r1.com' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 124ms (Views: 0.3ms | ActiveRecord: 18.8ms)
+
+
+Started POST "/users/register?email=amar@ama11r1.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 00:51:01 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@ama11r1.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@ama11r1.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `password_digest`, `created_at`, `updated_at`) VALUES ('amar@ama11r1.com', '$2a$10$DTus4Jn/z8vGB4X6ldYkVeRdJ0BImENuKYXwCRNmoqWK6DlJ9hik6', '2019-02-20 17:51:01', '2019-02-20 17:51:01')[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@ama11r1.com' LIMIT 1[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@ama11r1.com' LIMIT 1[0m  [["email", "amar@ama11r1.com"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 235ms (ActiveRecord: 3.4ms)
+
+
+  
+TypeError (no implicit conversion of Symbol into Integer):
+  
+app/controllers/users_controller.rb:76:in `[]'
+app/controllers/users_controller.rb:76:in `parse_user_detail'
+app/controllers/users_controller.rb:29:in `register'
+Started POST "/users/register?email=amar@ama111r1.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 00:52:08 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@ama111r1.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@ama111r1.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `password_digest`, `created_at`, `updated_at`) VALUES ('amar@ama111r1.com', '$2a$10$iBex7s4erpySm7H6031Juelr0JYqxWVnnvejZ.XKbYXmHmeJJVm3W', '2019-02-20 17:52:09', '2019-02-20 17:52:09')[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@ama111r1.com' LIMIT 1[0m
+  [1m[36mCACHE User Load (0.2ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@ama111r1.com' LIMIT 1[0m  [["email", "amar@ama111r1.com"], ["LIMIT", 1]]
+Completed 201 Created in 305ms (Views: 0.3ms | ActiveRecord: 13.6ms)
+
+
+  [1m[35mSQL (3.5ms)[0m  [1m[31mDELETE FROM `users`[0m
+Started POST "/users/register?email=amar@amar.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 00:53:48 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@amar.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@amar.com' LIMIT 1[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO `users` (`email`, `password_digest`, `created_at`, `updated_at`) VALUES ('amar@amar.com', '$2a$10$qhQzxuGaORz2vb1OGDAr0.peFTiKBlMXASC.4sIRlJ2PLQV1EqlA2', '2019-02-20 17:53:48', '2019-02-20 17:53:48')[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@amar.com' LIMIT 1[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@amar.com' LIMIT 1[0m  [["email", "amar@amar.com"], ["LIMIT", 1]]
+Completed 201 Created in 250ms (Views: 0.3ms | ActiveRecord: 3.5ms)
+
+
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@amar' LIMIT 1[0m
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@amar.com' LIMIT 1[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@amar.com' LIMIT 1[0m
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@amar.com' LIMIT 1[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@amar.com' LIMIT 1[0m
+Started POST "/users/register?email=amar@amar.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 00:59:38 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@amar.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@amar.com' LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 123ms (Views: 0.4ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/users/register?email=amar@ama1r.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 00:59:43 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@ama1r.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.5ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@ama1r.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `password_digest`, `created_at`, `updated_at`) VALUES ('amar@ama1r.com', '$2a$10$Fw9rDs35PVU85Vv9IEbEOeocDyrX8b57XsVzpm7yZkcYJ/3xoelJe', '2019-02-20 17:59:43', '2019-02-20 17:59:43')[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@ama1r.com' LIMIT 1[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@ama1r.com' LIMIT 1[0m  [["email", "amar@ama1r.com"], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@ama1r.com' LIMIT 1[0m  [["email", "amar@ama1r.com"], ["LIMIT", 1]]
+Completed 201 Created in 334ms (Views: 0.6ms | ActiveRecord: 3.0ms)
+
+
+Started POST "/users/register?email=amar@amr.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 01:00:14 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@amr.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@amr.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `password_digest`, `created_at`, `updated_at`) VALUES ('amar@amr.com', '$2a$10$tJ.J6LxR4D/EP/phyrWwA.PDvvtCYjIfemwBdQQrmGk5xnUkCqrEW', '2019-02-20 18:00:15', '2019-02-20 18:00:15')[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@amr.com' LIMIT 1[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@amr.com' LIMIT 1[0m  [["email", "amar@amr.com"], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@amr.com' LIMIT 1[0m  [["email", "amar@amr.com"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 353ms (ActiveRecord: 25.4ms)
+
+
+  
+NoMethodError (undefined method `key?' for "name email role phone":String):
+  
+app/models/user.rb:8:in `as_object'
+app/commands/authenticate_user.rb:10:in `call'
+app/controllers/users_controller.rb:82:in `authenticate'
+app/controllers/users_controller.rb:27:in `register'
+Started POST "/users/register?email=amar@1amr.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 01:00:25 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@1amr.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.7ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@1amr.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `password_digest`, `created_at`, `updated_at`) VALUES ('amar@1amr.com', '$2a$10$ndh6peshxFgO.2qEU5iXjOzQEAj55z5Tk0Jndqlb9sSKXG784eTAu', '2019-02-20 18:00:25', '2019-02-20 18:00:25')[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@1amr.com' LIMIT 1[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@1amr.com' LIMIT 1[0m  [["email", "amar@1amr.com"], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@1amr.com' LIMIT 1[0m  [["email", "amar@1amr.com"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 356ms (ActiveRecord: 3.2ms)
+
+
+  
+NoMethodError (undefined method `key?' for [:name, :email, :role, :phone]:Array):
+  
+app/models/user.rb:8:in `as_object'
+app/commands/authenticate_user.rb:10:in `call'
+app/controllers/users_controller.rb:82:in `authenticate'
+app/controllers/users_controller.rb:27:in `register'
+Started POST "/users/register?email=amar@1am2r.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 01:00:51 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@1am2r.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.7ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@1am2r.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `password_digest`, `created_at`, `updated_at`) VALUES ('amar@1am2r.com', '$2a$10$pynKJEdO1gQF0wHMzoPgduX/TnxylFirvTgEiNhEI5Rl9nVJ4C02.', '2019-02-20 18:00:51', '2019-02-20 18:00:51')[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@1am2r.com' LIMIT 1[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@1am2r.com' LIMIT 1[0m  [["email", "amar@1am2r.com"], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@1am2r.com' LIMIT 1[0m  [["email", "amar@1am2r.com"], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 344ms (ActiveRecord: 3.5ms)
+
+
+  
+ArgumentError (wrong number of arguments (given 4, expected 0..1)):
+  
+app/models/user.rb:8:in `as_object'
+app/commands/authenticate_user.rb:10:in `call'
+app/controllers/users_controller.rb:82:in `authenticate'
+app/controllers/users_controller.rb:27:in `register'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  `users`.* FROM `users` ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` ORDER BY `users`.`id` ASC LIMIT 1[0m
+Started POST "/users/register?email=amar@1am2qr.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 01:01:30 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@1am2qr.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@1am2qr.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `password_digest`, `created_at`, `updated_at`) VALUES ('amar@1am2qr.com', '$2a$10$23GTq1SQgLC9YCJ5Bgx4uOV/pu8AQGsb.ShKIQ2hwBrEBkLHJxdue', '2019-02-20 18:01:30', '2019-02-20 18:01:30')[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@1am2qr.com' LIMIT 1[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@1am2qr.com' LIMIT 1[0m  [["email", "amar@1am2qr.com"], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@1am2qr.com' LIMIT 1[0m  [["email", "amar@1am2qr.com"], ["LIMIT", 1]]
+Completed 201 Created in 355ms (Views: 0.5ms | ActiveRecord: 3.2ms)
+
+
+Started POST "/users/register?email=amar@1am2qr.com1&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 01:02:02 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@1am2qr.com1", "password"=>"[FILTERED]"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@1am2qr.com1' LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+Completed 500 Internal Server Error in 101ms (Views: 0.2ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/users/register?email=amar@1am2qr.com1&password=[FILTERED]&role=vendor" for 127.0.0.1 at 2019-02-21 01:02:10 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@1am2qr.com1", "password"=>"[FILTERED]", "role"=>"vendor"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@1am2qr.com1' LIMIT 1[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `users` (`email`, `password_digest`, `role`, `created_at`, `updated_at`) VALUES ('amar@1am2qr.com1', '$2a$10$K8MioqRivpdUGIE/wb/e3./r.YoRcmQAxj17hIhDdkL51oSj0hbZm', 200, '2019-02-20 18:02:10', '2019-02-20 18:02:10')[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@1am2qr.com1' LIMIT 1[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@1am2qr.com1' LIMIT 1[0m  [["email", "amar@1am2qr.com1"], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@1am2qr.com1' LIMIT 1[0m  [["email", "amar@1am2qr.com1"], ["LIMIT", 1]]
+Completed 201 Created in 353ms (Views: 0.3ms | ActiveRecord: 3.3ms)
+
+
+Started POST "/users/register?email=amar@1am2qr.co&password=[FILTERED]&role=vendor" for 127.0.0.1 at 2019-02-21 01:03:00 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@1am2qr.co", "password"=>"[FILTERED]", "role"=>"vendor"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@1am2qr.co' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO `users` (`email`, `password_digest`, `role`, `created_at`, `updated_at`) VALUES ('amar@1am2qr.co', '$2a$10$6fxVNJOQfCDFLh6lim3iLewPZgpQ/7hJjq7MbdJa5HNV8SN6D8z.y', 200, '2019-02-20 18:03:00', '2019-02-20 18:03:00')[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@1am2qr.co' LIMIT 1[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@1am2qr.co' LIMIT 1[0m  [["email", "amar@1am2qr.co"], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@1am2qr.co' LIMIT 1[0m  [["email", "amar@1am2qr.co"], ["LIMIT", 1]]
+Completed 201 Created in 329ms (Views: 0.5ms | ActiveRecord: 3.1ms)
+
+
+Started POST "/users/register?email=amar@1am12qr.co&password=[FILTERED]&role=vendor" for 127.0.0.1 at 2019-02-21 01:06:26 +0700
+Processing by UsersController#register as */*
+  Parameters: {"email"=>"amar@1am12qr.co", "password"=>"[FILTERED]", "role"=>"vendor"}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.6ms)[0m  [1m[34mSELECT  1 AS one FROM `users` WHERE `users`.`email` = BINARY 'amar@1am12qr.co' LIMIT 1[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO `users` (`email`, `password_digest`, `role`, `created_at`, `updated_at`) VALUES ('amar@1am12qr.co', '$2a$10$Yh7S3LCEv/hnGIwGfQqyJ.PcgCbaXrIQRa4E3JZQ.YT8qcfOBk2Xq', 200, '2019-02-20 18:06:26', '2019-02-20 18:06:26')[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@1am12qr.co' LIMIT 1[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@1am12qr.co' LIMIT 1[0m  [["email", "amar@1am12qr.co"], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@1am12qr.co' LIMIT 1[0m  [["email", "amar@1am12qr.co"], ["LIMIT", 1]]
+Completed 201 Created in 344ms (Views: 0.6ms | ActiveRecord: 3.8ms)
+
+
+Started POST "/users/login?email=amar@asia.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 01:10:50 +0700
+Processing by UsersController#login as */*
+  Parameters: {"email"=>"amar@asia.com", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@asia.com' LIMIT 1[0m
+Completed 401 Unauthorized in 13ms (Views: 0.2ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/users/login?email=amar@amar.com&password=[FILTERED]" for 127.0.0.1 at 2019-02-21 01:10:56 +0700
+Processing by UsersController#login as */*
+  Parameters: {"email"=>"amar@amar.com", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (7.8ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@amar.com' LIMIT 1[0m
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@amar.com' LIMIT 1[0m  [["email", "amar@amar.com"], ["LIMIT", 1]]
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT  `users`.* FROM `users` WHERE `users`.`email` = 'amar@amar.com' LIMIT 1[0m  [["email", "amar@amar.com"], ["LIMIT", 1]]
+Completed 201 Created in 289ms (Views: 0.3ms | ActiveRecord: 33.3ms)
+
+
