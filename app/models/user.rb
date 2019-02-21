@@ -1,8 +1,9 @@
 class User < ApplicationRecord
   has_secure_password
-  validates_presence_of :email, :password_digest, :role
+  validates_presence_of :email, :password_digest, :role, :medium
   validates_uniqueness_of :email
   enum role: { user: 100, vendor: 200, admin: 500 }
+  enum role: { referral: 100, internet: 200, social: 300 }
   after_create :generate_referral_code
 
   def as_object

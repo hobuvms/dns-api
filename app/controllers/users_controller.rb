@@ -24,7 +24,6 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       auth = authenticate(params[:email], params[:password])
-      puts auth.inspect
       response = { message: 'User created successfully' }.merge parse_user_detail(auth)
       render_json(response, true, :created)
     else
@@ -82,12 +81,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.permit(:name, :email, :password, :password, :phone, :role, :company_name)
-  end
-
-  # Only allow a trusted parameter "white list" through.
-  def user_data_params
-    params.permit(:username, :first_name, :last_name, :email, :role, :password_digest, :password, :dns_points,
-                  :dob, :gender, :phone)
+    params.permit(:name, :email, :password, :password, :phone, :role, :company_name, :notes, :medium)
   end
 end
