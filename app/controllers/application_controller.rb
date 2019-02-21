@@ -12,4 +12,8 @@ class ApplicationController < ActionController::API
   def render_json(message, success, status)
     render json: { data: message, success: success }, status: status
   end
+
+  def current_vendor
+    @current_user
+  end
 end

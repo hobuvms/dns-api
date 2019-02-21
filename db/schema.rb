@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190221020037) do
+ActiveRecord::Schema.define(version: 20190221144916) do
+
+  create_table "user_leads", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.bigint "vendor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "medium"
+    t.index ["user_id"], name: "index_user_leads_on_user_id"
+    t.index ["vendor_id"], name: "index_user_leads_on_vendor_id"
+  end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -28,4 +38,6 @@ ActiveRecord::Schema.define(version: 20190221020037) do
     t.index ["referral_code"], name: "index_users_on_referral_code"
   end
 
+  add_foreign_key "user_leads", "users"
+  add_foreign_key "user_leads", "users", column: "vendor_id"
 end
