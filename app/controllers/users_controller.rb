@@ -22,7 +22,6 @@ class UsersController < ApplicationController
 
   def register
     @user = User.new(user_params)
-    # @user.build_vendor_detail
     if @user.save
       auth = authenticate(params[:email], params[:password])
       puts auth.inspect
@@ -83,7 +82,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.permit(:name, :email, :password, :password, :phone, :role)
+    params.permit(:name, :email, :password, :password, :phone, :role, :company_name)
   end
 
   # Only allow a trusted parameter "white list" through.
