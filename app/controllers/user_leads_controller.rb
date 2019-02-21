@@ -20,16 +20,17 @@ class UserLeadsController < ApplicationController
   def create
     if user_lead_params[:referral_code].present?
       vendor = Vendor.find_by(referral_code: user_lead_params[:referral_code])
-      return render_json({ message: 'Referral Code Invalid.' }, false, :unprocessable_entity)
+      return render_json({ message: 'Referral Code Invalid.' }, false, :unprocessable_entity) if vendor.blank?
     else
       vendor = Vendor.find_by(referral_code: :hobuadmin)
     end
 
     user = get_user(user_lead_params)
-    @user_lead = UserLead.new(vendor_id: vendor.id, user_id: user.id,
-                              medium: user_lead_params[:medium])
+    @user_lead = UserLead.find_or_initialize_by(vendor_id: vendor.id, user_id: user.id)
+    @user_lead.medium = user_lead_params[:medium] unless @user_lead.new_record?
+    
     if @user_lead.save
-      render json: @user_lead, status: :created, location: @user_lead
+      render json: @user_lead, status: :created
     else
       render_json({ error: @user_lead.errors.full_messages }, false, :unprocessable_entity)
     end
@@ -52,12 +53,13 @@ class UserLeadsController < ApplicationController
   private
 
   def get_user(params)
-    user = User.find_or_intialize_by(email: params[:email])
+    user = User.find_or_initialize_by(email: params[:email])
     return user unless user.new_record?
 
     user.role = :user
     user.name = params[:name]
     user.medium = params[:medium]
+    user.password = "XYZ"
     user.save
     user
   end
