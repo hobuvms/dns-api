@@ -1,7 +1,7 @@
 class UserAddress < ApplicationRecord
   belongs_to :user
 
-  validates_presence_of :formatted_address, :user_id
+  validates_presence_of :formatted_address
 
   before_create do
   	user_address = UserAddress.where(user_id: user_id)

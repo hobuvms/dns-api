@@ -11,6 +11,8 @@ class User < ApplicationRecord
 
   has_one :user_address
 
+  accepts_nested_attributes_for :user_address
+
   def as_object
     as_json(only: %i[id name email role phone referral_code company_name notes medium])
   end

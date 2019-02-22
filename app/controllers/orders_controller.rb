@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
 
   # PATCH/PUT /orders/1
   def update
-    if @order.update(order_params)
+    if @order.update(order_update_params)
       render json: @order
     else
       render json: @order.errors, status: :unprocessable_entity
@@ -49,5 +49,9 @@ class OrdersController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def order_params
       params.require(:order).permit(:user_id, :product_id, :account_number, :working_order, :company_name, :price, :installation, :expiry_date, :details)
+    end
+
+    def order_update_params
+      params.require(:order).permit(:product_id, :account_number, :working_order, :company_name, :price, :installation, :expiry_date, :details)
     end
 end
