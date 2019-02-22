@@ -7,6 +7,8 @@ class User < ApplicationRecord
   enum media: { referral: 100, internet: 200, social: 300, direct: 400 }
   after_create :generate_referral_code
 
+  has_one :user_address
+
   def as_object
     as_json(only: %i[id name email role phone referral_code company_name notes medium])
   end
