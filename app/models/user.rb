@@ -7,6 +7,8 @@ class User < ApplicationRecord
   enum media: { referral: 100, internet: 200, social: 300, direct: 400 }
   after_create :generate_referral_code
 
+  has_many :orders, foreign_key: :vendor_id
+
   has_one :user_address
 
   def as_object
