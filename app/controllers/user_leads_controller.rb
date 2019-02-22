@@ -25,15 +25,11 @@ class UserLeadsController < ApplicationController
       vendor = Vendor.find_by(referral_code: :hobuadmin)
     end
 
-    user = get_user(user_lead_params)
-    @user_lead = UserLead.find_or_initialize_by(vendor_id: vendor.id, user_id: user.id)
-    @user_lead.medium = user_lead_params[:medium] if @user_lead.new_record?
-    
-    if @user_lead.save
-      render json: @user_lead, status: :created
-    else
-      render_json({ error: @user_lead.errors.full_messages }, false, :unprocessable_entity)
-    end
+    return generate_lead(user_lead_params, vendor)
+  end
+
+  def add_lead
+    return generate_lead(user_lead_params)
   end
 
   # PATCH/PUT /user_leads/1
@@ -52,8 +48,22 @@ class UserLeadsController < ApplicationController
 
   private
 
+  def generate_lead(user_lead_params, vendor = nil)
+    vendor ||= current_vendor
+    user = get_user(user_lead_params)
+    @user_lead = UserLead.find_or_initialize_by(vendor_id: vendor.id, user_id: user.id)
+    @user_lead.medium = user_lead_params[:medium] if @user_lead.new_record?
+    
+    if @user_lead.save
+      render json: @user_lead, status: :created
+    else
+      render_json({ error: @user_lead.errors.full_messages }, false, :unprocessable_entity)
+    end
+  end
+
   def get_user(params)
     user = User.find_or_initialize_by(email: params[:email])
+
     return user unless user.new_record?
 
     user.role = :user
