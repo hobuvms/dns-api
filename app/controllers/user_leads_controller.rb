@@ -4,7 +4,7 @@ class UserLeadsController < ApplicationController
 
   # GET /user_leads
   def index
-    @user_leads = current_vendor.user_leads.as_json(only: :medium,
+    @user_leads = current_vendor.user_leads.as_json(only: [:medium, :phone, :created_at, :updated_at],
                                                     include: { user: { only: %i[name email phone company_name
                                                                                 notes medium] } })
 
@@ -34,7 +34,7 @@ class UserLeadsController < ApplicationController
 
   # PATCH/PUT /user_leads/1
   def update
-    if @user_lead.update(user_lead_params)
+    if @user_lead.update(user_lead_update_params)
       render json: @user_lead
     else
       render json: @user_lead.errors, status: :unprocessable_entity
@@ -53,6 +53,7 @@ class UserLeadsController < ApplicationController
     user = get_user(user_lead_params)
     @user_lead = UserLead.find_or_initialize_by(vendor_id: vendor.id, user_id: user.id)
     @user_lead.medium = user_lead_params[:medium] if @user_lead.new_record?
+    @user_lead.phone = user_lead_params[:phone]
     
     if @user_lead.save
       render json: @user_lead, status: :created
@@ -82,5 +83,9 @@ class UserLeadsController < ApplicationController
   # Only allow a trusted parameter "white list" through.
   def user_lead_params
     params.require(:user_lead).permit(:referral_code, :name, :medium, :email)
+  end
+
+  def user_lead_update_params
+    params.require(:user_lead).permit(:name, :phone)
   end
 end

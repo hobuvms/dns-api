@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_addresses, only: %i[create update]
   resources :user_leads, only: %i[index create] do
     collection do
       post :add_lead
