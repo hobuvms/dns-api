@@ -27,7 +27,7 @@ class UserLeadsController < ApplicationController
 
     user = get_user(user_lead_params)
     @user_lead = UserLead.find_or_initialize_by(vendor_id: vendor.id, user_id: user.id)
-    @user_lead.medium = user_lead_params[:medium] unless @user_lead.new_record?
+    @user_lead.medium = user_lead_params[:medium] if @user_lead.new_record?
     
     if @user_lead.save
       render json: @user_lead, status: :created
