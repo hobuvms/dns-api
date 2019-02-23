@@ -63,15 +63,13 @@ class UserLeadsController < ApplicationController
   def get_user(params)
     user = User.find_or_initialize_by(email: params[:email])
     user.user_address_attributes = params[:user_address_attributes]
-    unless user.new_record?
-      user.save!
-    else
+    if user.new_record?
       user.role = :user
       user.name = params[:name]
       user.medium = params[:medium]
       user.password = "XYZ"
     end
-
+    user.save!
     user
   end
 
