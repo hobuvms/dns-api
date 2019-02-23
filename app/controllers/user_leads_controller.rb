@@ -4,9 +4,7 @@ class UserLeadsController < ApplicationController
 
   # GET /user_leads
   def index
-    @user_leads = current_vendor.user_leads.as_json(only: [:medium, :phone, :created_at, :updated_at],
-                                                    include: { user: { only: %i[name email phone company_name
-                                                                                notes medium] } })
+    @user_leads = current_vendor.user_leads.as_object
 
     render json: @user_leads
   end
@@ -51,27 +49,29 @@ class UserLeadsController < ApplicationController
   def generate_lead(user_lead_params, vendor = nil)
     vendor ||= current_vendor
     user = get_user(user_lead_params)
-    @user_lead = UserLead.find_or_initialize_by(vendor_id: vendor.id, user_id: user.id)
-    @user_lead.medium = user_lead_params[:medium] if @user_lead.new_record?
-    @user_lead.phone = user_lead_params[:phone]
-    
-    if @user_lead.save
-      render json: @user_lead, status: :created
+    user_lead = UserLead.find_or_initialize_by(vendor_id: vendor.id, user_id: user.id)
+    user_lead.medium = user_lead_params[:medium] if user_lead.new_record?
+    user_lead.phone = user_lead_params[:phone]
+
+    if user_lead.save
+      render_json({ message: 'lead added', data: user_lead.as_object }, true, :created)
     else
-      render_json({ error: @user_lead.errors.full_messages }, false, :unprocessable_entity)
+      render_json({ error: user_lead.errors.full_messages }, false, :unprocessable_entity)
     end
   end
 
   def get_user(params)
     user = User.find_or_initialize_by(email: params[:email])
+    user.user_address_attributes = params[:user_address_attributes]
+    unless user.new_record?
+      user.save!
+    else
+      user.role = :user
+      user.name = params[:name]
+      user.medium = params[:medium]
+      user.password = "XYZ"
+    end
 
-    return user unless user.new_record?
-
-    user.role = :user
-    user.name = params[:name]
-    user.medium = params[:medium]
-    user.password = "XYZ"
-    user.save
     user
   end
 
@@ -82,7 +82,9 @@ class UserLeadsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def user_lead_params
-    params.require(:user_lead).permit(:referral_code, :name, :medium, :email)
+    params.require(:user_lead).permit(:referral_code, :name, :medium, :email, :phone,
+                                      user_address_attributes: [%w[country_name postal_code latitude longitude city
+                                                                   formatted_address region_name]])
   end
 
   def user_lead_update_params

@@ -81,6 +81,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.permit(:name, :email, :password, :password, :phone, :company_name, :notes, :medium, user_address_attributes: {})
+    params.permit(:name, :email, :password, :password, :phone, :company_name, :notes, :medium, user_address_attributes: [%w[formatted_address postal_code latitude longitude city country_name region_name]])
   end
 end

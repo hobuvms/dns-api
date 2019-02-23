@@ -22,6 +22,6 @@ class User < ApplicationRecord
 
     code = email.split(/\W+/).first
     code = email.split(/\W+/).join[0...5] if code.blank? || code.to_s.length < 5
-    update_attributes(referral_code: code)
+    update_attributes(referral_code: code+id.to_s)
   end
 end

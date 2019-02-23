@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :orders
+  resources :orders, only: %i[create index update]
   resources :user_addresses, only: %i[create update]
   resources :user_leads, only: %i[index create] do
     collection do
@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  post 'authenticate', to: 'authentication#authenticate'
+  # post 'authenticate', to: 'authentication#authenticate'
   resources :users, only: [:update] do
     collection do
       post :register
