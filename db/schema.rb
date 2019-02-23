@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190222171415) do
+ActiveRecord::Schema.define(version: 20190223095710) do
 
-  create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.bigint "vendor_id"
-    t.bigint "user_id"
     t.integer "product_id"
     t.string "account_number"
     t.string "working_order"
@@ -25,11 +24,12 @@ ActiveRecord::Schema.define(version: 20190222171415) do
     t.string "details"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.bigint "user_lead_id"
+    t.index ["user_lead_id"], name: "index_orders_on_user_lead_id"
     t.index ["vendor_id"], name: "index_orders_on_vendor_id"
   end
 
-  create_table "user_addresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "user_addresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.bigint "user_id"
     t.string "formatted_address"
     t.string "postal_code"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20190222171415) do
     t.index ["user_id"], name: "index_user_addresses_on_user_id"
   end
 
-  create_table "user_leads", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "user_leads", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.bigint "user_id"
     t.bigint "vendor_id"
     t.datetime "created_at", null: false
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 20190222171415) do
     t.index ["vendor_id"], name: "index_user_leads_on_vendor_id"
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 20190222171415) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
-  add_foreign_key "orders", "users"
+  add_foreign_key "orders", "user_leads"
   add_foreign_key "orders", "users", column: "vendor_id"
   add_foreign_key "user_addresses", "users"
   add_foreign_key "user_leads", "users"

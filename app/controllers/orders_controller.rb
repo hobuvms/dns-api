@@ -3,11 +3,11 @@ class OrdersController < ApplicationController
 
   # GET /orders
   def index
-    orders = current_vendor.orders.includes(:user).as_json(only: %i[product_id account_number working_order created_at id
-                                                                    company_name price installation expiry_date details],
-                                                           include: {user: {only: %i[id name email phone company_name
-                                                                                     notes medium]}})
-    render_json(orders, true, :ok)
+    orders = current_vendor.orders.includes(:user_lead).as_json(only: %i[product_id account_number working_order 
+                                                                         created_at id company_name price installation
+                                                                         expiry_date details],
+                                                                include: {user_lead: {only: %i[id]}})
+    render_json(orders)
   end
 
   # GET /orders/1
@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
 
   # POST /orders
   def create
-    user = current_vendor.user_leads.exists?(user_id: order_params[:user_id])
+    user = current_vendor.user_leads.where(id: order_params[:user_lead_id]).first
     return render_json({ message: 'User not part of Vendor' }, false, 422) if user.blank?
 
     @order = Order.new(order_params.merge(vendor_id: current_vendor.id))
@@ -43,10 +43,10 @@ class OrdersController < ApplicationController
   end
 
   def customer_orders
-    return render_json("Not Auth", false, 422) if current_vendor.user_leads.exists?(user_id: params[:id])
-    order = current_vendor.orders.where(user_id: params[:id])
-                          .as_json(only: %i[id product_id account_number working_order company_name price
-                                            installation expiry_date details created_at])
+    puts current_vendor.user_leads.inspect
+    user_lead = current_vendor.user_leads.where(user_id: params[:id]).first
+    return render_json("Not Auth", false, 422) unless user_lead.present?
+    order = current_vendor.orders.where(user_lead_id: user_lead.id)
     render_json(order)
   end
 
@@ -59,10 +59,10 @@ class OrdersController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def order_params
-    params.require(:order).permit(:user_id, :product_id, :account_number, :working_order, :company_name, :price, :installation, :expiry_date, :details)
+    params.require(:order).permit(:user_lead_id, :product_id, :account_number, :working_order, :company_name, :price, :installation, :expiry_date, :details)
   end
 
   def order_update_params
-    params.require(:order).permit(:account_number, :working_order, :company_name, :price, :installation, :expiry_date, :details, :user_id)
+    params.require(:order).permit(:account_number, :working_order, :company_name, :price, :installation, :expiry_date, :details)
   end
 end
