@@ -9,8 +9,8 @@ class UsersController < ApplicationController
   # end
 
   def update
-    if @current_user == @user
-      if @user.update(user_params)
+    if current_vendor == @user
+      if @user.update(user_update_params)
         render_json(@user.as_object, true, :ok)
       else
         render_json(@user.errors, false, :unprocessable_entity)
@@ -73,7 +73,7 @@ class UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find(params[:id])
+    @user = Vendor.find(params[:id])
   end
 
   def authenticate(email, password)
@@ -81,6 +81,10 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.permit(:name, :email, :password, :password, :phone, :company_name, :notes, :medium, user_address_attributes: [%w[formatted_address postal_code latitude longitude city country_name region_name]])
+    params.permit(:name, :email, :password, :phone, :company_name, :notes, :medium, user_address_attributes: [%w[formatted_address postal_code latitude longitude city country_name region_name]])
+  end
+
+  def user_update_params
+    params.permit(:name, :password, :phone, :company_name, :notes, :medium, user_address_attributes: [%w[formatted_address postal_code latitude longitude city country_name region_name]])
   end
 end
