@@ -27,7 +27,7 @@ class UsersController < ApplicationController
       response = { message: 'User created successfully' }.merge parse_user_detail(auth)
       render_json(response, true, :created)
     else
-      render_json(@user.errors.full_messages, false, :bad)
+      render_json(@user.errors.full_messages, false, :unprocessable_entity)
     end
   end
 
