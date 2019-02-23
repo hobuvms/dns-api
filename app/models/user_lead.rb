@@ -6,7 +6,7 @@ class UserLead < ApplicationRecord
   has_many :orders
 	
 	def as_object
-	  	as_json(only: %i[medium phone created_at updated_at],
-                include: {user_lead: {only: %i[id]}})
+	  	as_json(only: %i[id medium phone created_at updated_at],
+                include: {user: {only: %i[id]}})
 	end  
 end
