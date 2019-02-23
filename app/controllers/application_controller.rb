@@ -6,6 +6,11 @@ class ApplicationController < ActionController::API
     render_json(exception.message, false, 422)
   end
 
+protected
+
+  def validate_presence(*args)
+    raise ActiveRecord::RecordNotFound, 'Params Missing' if args.any?(&:blank?)
+  end
 
   private
 
