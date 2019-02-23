@@ -2,11 +2,15 @@ class ApplicationController < ActionController::API
   before_action :authenticate_request
   attr_reader :current_user
 
-   rescue_from ActiveRecord::RecordNotFound do |exception|
-    render_json(exception.message, false, 422)
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    return render_json(exception.message, false, 422)
   end
 
-protected
+  rescue_from ActionController::ParameterMissing do |exception|
+    return render_json(exception.message, false, 400)
+  end
+
+  protected
 
   def validate_presence(*args)
     raise ActiveRecord::RecordNotFound, 'Params Missing' if args.any?(&:blank?)
