@@ -1,6 +1,6 @@
 class UserLeadsController < ApplicationController
   # before_action :set_user_lead, only: [:show, :update, :destroy]
-  skip_before_action :authenticate_request, only: [:create]
+  skip_before_action :authenticate_request, only: [:create, :add_lead]
 
   # GET /user_leads
   def index
@@ -62,7 +62,12 @@ class UserLeadsController < ApplicationController
 
   def get_user(params)
     user = User.find_or_initialize_by(email: params[:email])
-    user.user_address_attributes = params[:user_address_attributes]
+    if  user.new_record?
+      user.user_address_attributes = params[:user_address_attributes]
+    else
+      user.user_address.update(params[:user_address_attributes])
+    end
+
     if user.new_record?
       user.role = :user
       user.name = params[:name]
