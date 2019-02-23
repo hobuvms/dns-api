@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :orders, only: %i[create index update]
+  resources :orders, only: %i[create index update] do
+    member do
+      get :customer_orders
+    end
+  end
   resources :user_addresses, only: %i[create update]
   resources :user_leads, only: %i[index create] do
     collection do

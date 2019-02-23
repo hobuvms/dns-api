@@ -42,6 +42,14 @@ class OrdersController < ApplicationController
     @order.destroy
   end
 
+  def customer_orders
+    return render_json("Not Auth", false, 422) if current_vendor.user_leads.exists?(user_id: params[:id])
+    order = current_vendor.orders.where(user_id: params[:id])
+                          .as_json(only: %i[id product_id account_number working_order company_name price
+                                            installation expiry_date details created_at])
+    render_json(order)
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_order
