@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190224145421) do
+ActiveRecord::Schema.define(version: 20190224171009) do
 
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "vendor_id"
@@ -62,12 +62,12 @@ ActiveRecord::Schema.define(version: 20190224145421) do
     t.string "email"
     t.string "password_digest"
     t.integer "role"
-    t.integer "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "referral_code"
     t.string "company_name"
     t.string "notes"
+    t.string "phone"
     t.index ["email"], name: "index_users_on_email"
     t.index ["referral_code"], name: "index_users_on_referral_code"
   end
