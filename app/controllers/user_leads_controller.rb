@@ -4,7 +4,7 @@ class UserLeadsController < ApplicationController
 
   def index
     @user_leads = current_vendor.user_leads.includes(:user).as_json(only: %i[id medium name phone created_at updated_at],
-                include: {user: {only: %i[id] , include: {user_address: {only: [:id, :formatted_address]}}}})
+                include: {user: {only: %i[id email] , include: {user_address: {only: [:id, :formatted_address]}}}})
 
     render json: @user_leads
   end
