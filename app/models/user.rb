@@ -15,7 +15,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :user_address
 
   def as_object
-    as_json(only: %i[id name email role phone referral_code company_name notes])
+    as_json(only: %i[id name email role phone referral_code company_name notes], include: :user_address)
   end
 
   def generate_referral_code
