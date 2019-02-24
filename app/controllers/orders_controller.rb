@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
 
   # GET /orders
   def index
-    orders = current_vendor.orders.includes(:user_lead).as_json(only: %i[product_id account_number working_order 
+    orders = current_vendor.orders.includes(:user_lead).as_json(only: %i[product_id taxed status account_number working_order 
                                                                          created_at id company_name price installation
                                                                          expiry_date details],
                                                                 include: {user_lead: {only: %i[id]}})
@@ -59,10 +59,10 @@ class OrdersController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def order_params
-    params.require(:order).permit(:user_lead_id, :product_id, :account_number, :working_order, :company_name, :price, :installation, :expiry_date, :details)
+    params.require(:order).permit(:user_lead_id, :product_id, :status, :taxed, :account_number, :working_order, :company_name, :price, :installation, :expiry_date, :details)
   end
 
   def order_update_params
-    params.require(:order).permit(:account_number, :working_order, :company_name, :price, :installation, :expiry_date, :details)
+    params.require(:order).permit(:account_number, :status, :working_order, :company_name, :price, :installation, :expiry_date, :details)
   end
 end

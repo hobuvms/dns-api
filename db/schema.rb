@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190224044717) do
+ActiveRecord::Schema.define(version: 20190224145421) do
 
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "vendor_id"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 20190224044717) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_lead_id"
+    t.string "status"
+    t.boolean "taxed"
     t.index ["user_lead_id"], name: "index_orders_on_user_lead_id"
     t.index ["vendor_id"], name: "index_orders_on_vendor_id"
   end
