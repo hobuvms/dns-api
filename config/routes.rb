@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     end
   end
   resources :user_addresses, only: %i[create update]
-  resources :user_leads, only: %i[index create] do
+  resources :user_leads, only: %i[index create update] do
     collection do
       post :add_lead
     end

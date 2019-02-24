@@ -1,23 +1,14 @@
 class UserLeadsController < ApplicationController
-  # before_action :set_user_lead, only: [:show, :update, :destroy]
+  before_action :set_user_lead, only: [:show, :update, :destroy]
   skip_before_action :authenticate_request, only: [:create]
 
-  # GET /user_leads
   def index
     @user_leads = current_vendor.user_leads.includes(:user).as_json(only: %i[id medium phone created_at updated_at],
-                                                                    include: { user: { only: %i[id name email phone
-                                                                                                company_name notes
-                                                                                                medium] } })
+                include: {user: {only: %i[id] , include: {user_address: {only: [:id, :formatted_address]}}}})
 
     render json: @user_leads
   end
 
-  # GET /user_leads/1
-  def show
-    render json: @user_lead
-  end
-
-  # POST /user_leads
   def create
     if user_lead_params[:referral_code].present?
       vendor = Vendor.find_by(referral_code: user_lead_params[:referral_code])
@@ -42,11 +33,6 @@ class UserLeadsController < ApplicationController
     end
   end
 
-  # DELETE /user_leads/1
-  def destroy
-    @user_lead.destroy
-  end
-
   private
 
   def generate_lead(user_lead_params, vendor = nil)
@@ -55,6 +41,7 @@ class UserLeadsController < ApplicationController
     user_lead = UserLead.find_or_initialize_by(vendor_id: vendor.id, user_id: user.id)
     user_lead.medium = user_lead_params[:medium] if user_lead.new_record?
     user_lead.phone = user_lead_params[:phone]
+    user_lead.name = user_lead_params[:name]
 
     if user_lead.save
       render_json({ message: 'lead added', data: user_lead.as_object }, true, :created)
@@ -66,17 +53,14 @@ class UserLeadsController < ApplicationController
   def get_user(params)
     user = User.find_or_initialize_by(email: params[:email])
     if user.new_record?
-      user.user_address_attributes = params[:user_address_attributes]
+      user.role = :user
+      user.password = "XYZ"
+      user.user_address_attributes = params[:user_address_attributes] if params[:user_address_attributes]
     else
+      user.build_user_address if user.user_address.nil?
       user.user_address.update(params[:user_address_attributes])
     end
 
-    if user.new_record?
-      user.role = :user
-      user.name = params[:name]
-      user.medium = params[:medium]
-      user.password = "XYZ"
-    end
     user.save!
     user
   end
@@ -88,12 +72,13 @@ class UserLeadsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def user_lead_params
-    params.require(:user_lead).permit(:referral_code, :name, :medium, :email, :phone,
+    params.require(:user_lead).permit(:referral_code, :name, :medium, :email, :phone, :name,
                                       user_address_attributes: [%w[country_name postal_code latitude longitude city
                                                                    formatted_address region_name]])
   end
 
   def user_lead_update_params
-    params.require(:user_lead).permit(:name, :phone)
+    params.require(:user_lead).permit(:name, :phone, user_address_attributes: [%w[country_name postal_code latitude longitude city
+                                                                   formatted_address region_name]])
   end
 end

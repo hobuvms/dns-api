@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def register
-    @user = User.new(user_params.merge(role: :vendor, medium: :direct))
+    @user = User.new(user_params.merge(role: :vendor))
     if @user.save
       auth = authenticate(params[:email], params[:password])
       response = { message: 'User created successfully' }.merge parse_user_detail(auth)
@@ -81,7 +81,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.permit(:name, :email, :password, :phone, :company_name, :notes, :medium, user_address_attributes: [%w[formatted_address postal_code latitude longitude city country_name region_name]])
+    params.permit(:name, :email, :password, :phone, :company_name, :notes, user_address_attributes: [%w[formatted_address postal_code latitude longitude city country_name region_name]])
   end
 
   def user_update_params
