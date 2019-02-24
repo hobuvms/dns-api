@@ -27,7 +27,7 @@ class UserLeadsController < ApplicationController
   # PATCH/PUT /user_leads/1
   def update
     if @user_lead.update(user_lead_update_params)
-      render json: @user_lead
+      render_json(@user_lead.as_object)
     else
       render json: @user_lead.errors, status: :unprocessable_entity
     end

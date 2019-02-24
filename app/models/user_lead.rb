@@ -12,11 +12,9 @@ class UserLead < ApplicationRecord
 	end  
 
 	def user_address_attributes=(params)
-		if user.user_address.present?
-			user.user_address.update(params)
-		else
+		unless user.user_address.present?
 			user.build_user_address
-			user.user_address.update(params)
 		end
+		user.user_address.update(params)
 	end
 end

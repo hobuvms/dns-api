@@ -8,6 +8,7 @@ class User < ApplicationRecord
   after_create :generate_referral_code
 
   has_many :orders, foreign_key: :vendor_id
+  has_many :user_leads, foreign_key: :vendor_id
 
   has_one :user_address
 
