@@ -21,6 +21,8 @@ module DnsApi
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
     config.logger = Logger.new(STDOUT)
+    config.serve_static_assets = true
+    config.assets.compile = false
 
     config.autoload_paths << Rails.root.join('lib')
 
