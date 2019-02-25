@@ -8,13 +8,18 @@ class AuthenticateUser
 
   def call
     if user
-      { token: JsonWebToken.encode(user_id: user.id), object: user.as_object }
+      { token: encode(user_id: user.id), object: user.as_object }
     else
       {}
     end
   end
 
   private
+
+    def encode(payload, exp = 24.hours.from_now)
+     payload[:exp] = exp.to_i
+     JWT.encode(payload, Rails.application.secrets.secret_key_base)
+   end
 
   attr_accessor :email, :password
 
