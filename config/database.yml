@@ -1,29 +1,25 @@
 default: &default
-  adapter: mysql2
+  adapter: postgresql
   pool: 5
   timeout: 5000
+  encoding: unicode
+  host: ec2-23-21-130-182.compute-1.amazonaws.com
+  database: d8vvj747f6lmpg
+  username: bebamkvagkizba
+  password: 9e54e74baec53f156def13bc2e1ee39fc2ceb19019c6a094426bbd9c3e9e7cdb
 
 development:
   <<: *default
-  port: 3306
-  database: deals_qa
-  username: "root"
-  password: ""
-  host: 127.0.0.1
+  encoding: unicode
 
-test:
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+
+staging:
   <<: *default
-  database: deals_qa
-  username: "root"
-  password: ""
-  host: 127.0.0.1
+  encoding: unicode
 
 production:
   <<: *default
-  username: "root"
-  password: ""
-  charset: utf8
-  collation: utf8_bin
-  port: 3306
-  database: deals_qa
-  host: 127.0.0.1
+  encoding: unicode
