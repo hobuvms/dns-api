@@ -42,6 +42,7 @@ class UserLeadsController < ApplicationController
     user_lead.medium = user_lead_params[:medium] if user_lead.new_record?
     user_lead.phone = user_lead_params[:phone]
     user_lead.name = user_lead_params[:name]
+    user_lead.notes = user_lead_params[:notes]
 
     if user_lead.save
       render_json({ message: 'lead added', data: user_lead.as_object }, true, :created)
