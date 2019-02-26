@@ -72,13 +72,13 @@ class UserLeadsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def user_lead_params
-    params.require(:user_lead).permit(:referral_code, :name, :medium, :email, :phone, :name,
+    params.require(:user_lead).permit(:referral_code, :name, :medium, :email, :phone, :name, :notes,
                                       user_address_attributes: [%w[country_name postal_code latitude longitude city
                                                                    formatted_address region_name]])
   end
 
   def user_lead_update_params
-    params.require(:user_lead).permit(:name, :phone, user_address_attributes: [%w[country_name postal_code latitude longitude city
+    params.require(:user_lead).permit(:name, :phone, :notes, user_address_attributes: [%w[country_name postal_code latitude longitude city
                                                                    formatted_address region_name]])
   end
 end
