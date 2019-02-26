@@ -1,12 +1,24 @@
+require 'csv'
 class UserLeadsController < ApplicationController
   before_action :set_user_lead, only: [:show, :update, :destroy]
-  skip_before_action :authenticate_request, only: [:create]
+    include ActionController::MimeResponds
+
+  skip_before_action :authenticate_request, only: [:create, :report]
 
   def index
-    @user_leads = current_vendor.user_leads.includes(:user).as_json(only: %i[id medium name phone created_at updated_at],
+    @user_leads = current_vendor.user_leads.includes(:user).as_json(only: %i[id medium notes name phone created_at updated_at],
                 include: {user: {only: %i[id email] , include: {user_address: {only: [:id, :formatted_address]}}}})
 
     render json: @user_leads
+  end
+
+  def report
+    d = Vendor.joins('left join user_leads on user_leads.vendor_id = users.id left join orders on orders.vendor_id = users.id left join users customer on customer.id = user_leads.user_id left join user_addresses on customer.id = user_addresses.user_id').select("users.company_name Company_Name, user_leads.medium MEDIUM, orders.price PRICE, user_leads.created_at as FIRST_CONTACT_DATE, user_leads.updated_at LAST_UPDATED, user_leads.name CUSTOMER_NAME, orders.status, formatted_address, 1 as UNIT, city, postal_code, user_leads.phone PHONE_NUMBER, 1, 1, 1, 1, users.name, account_number, working_order, installation, 1, 1, true, orders.details, expiry_date").where('users.id = ?', current_vendor.id)
+
+    respond_to do |format|
+      format.csv { send_data d.to_csv, filename: "users-#{Date.today}.csv" }
+    end
+
   end
 
   def create

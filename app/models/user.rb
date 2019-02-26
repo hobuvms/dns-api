@@ -25,4 +25,18 @@ class User < ApplicationRecord
     code = email.split(/\W+/).join[0...5] if code.blank? || code.to_s.length < 5
     update_attributes(referral_code: code+id.to_s)
   end
+
+  def self.to_csv
+    attributes = ["id", "name", "company_name", "medium", "price", "first_contact_date", "last_updated", "customer_name", "status", "formatted_address", "unit", "city", "postal_code", "phone_number", "tv", "internet", "hp", "shm", "account_number", "working_order", "installation", "installation_date", "installation_time", "activated", "details", "expiry_date"]
+
+    head_attributes = ["Service Company", "Medium", "Company", "Price", "First Contact Date (system)", "Latest Date Updated (system)", "Customer Name", "PROGRESS STATUS", "Street Address", "Unit", "City", "Postal Code", "Contact Phone", "TV Sale", "Int Sale", "HP Sale", "SHM", "Rep Name", "Account #", "Work Order #", "Install Date", "Install Time", "Activated", "Rep Paid", "Comments DETAILS", "EXPIRY"]
+
+    CSV.generate(headers: true) do |csv|
+      csv << head_attributes
+
+      all.each do |user|
+        csv << attributes.map{ |attr| user.send(attr) }
+      end
+    end
+  end
 end
