@@ -8,7 +8,7 @@ class Order < ApplicationRecord
   before_save :touch_user_lead
 
   def as_object
-    as_json(only: %i[id product_id account_number taxed status working_order company_name price installation expiry_date details
+    as_json(only: %i[id product_id account_number taxed status working_order company_name price installation installation_time expiry_date details
 					 created_at])
   end
 

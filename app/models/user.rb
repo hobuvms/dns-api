@@ -27,7 +27,7 @@ class User < ApplicationRecord
   end
 
   def self.to_csv
-    attributes = ["id", "name", "company_name", "medium", "price", "first_contact_date", "last_updated", "customer_name", "status", "formatted_address", "unit", "city", "postal_code", "phone_number", "tv", "internet", "hp", "shm", "account_number", "working_order", "installation", "installation_date", "installation_time", "activated", "details", "expiry_date"]
+    attributes = ["id", "name", "company_name", "medium", "price", "first_contact_date", "last_updated", "customer_name", "status", "formatted_address", "unit", "city", "postal_code", "phone_number", "tv", "internet", "hp", "shm", "account_number", "working_order", "installation", "installation_time", "activated", "details", "expiry_date"]
 
     head_attributes = ["Service Company", "Medium", "Company", "Price", "First Contact Date (system)", "Latest Date Updated (system)", "Customer Name", "PROGRESS STATUS", "Street Address", "Unit", "City", "Postal Code", "Contact Phone", "TV Sale", "Int Sale", "HP Sale", "SHM", "Rep Name", "Account #", "Work Order #", "Install Date", "Install Time", "Activated", "Rep Paid", "Comments DETAILS", "EXPIRY"]
 

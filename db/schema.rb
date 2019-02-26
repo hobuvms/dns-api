@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190226112952) do
+ActiveRecord::Schema.define(version: 20190226153119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20190226112952) do
     t.bigint "user_lead_id"
     t.string "status"
     t.boolean "taxed"
+    t.string "installation_time"
     t.index ["user_lead_id"], name: "index_orders_on_user_lead_id"
     t.index ["vendor_id"], name: "index_orders_on_vendor_id"
   end
