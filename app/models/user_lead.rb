@@ -7,7 +7,7 @@ class UserLead < ApplicationRecord
   validates_presence_of :medium
 	
 	def as_object
-	  	as_json(only: %i[id medium phone created_at updated_at],
+	  	as_json(only: %i[id medium phone created_at notes name updated_at],
                 include: {user: {only: %i[id] , include: {user_address: {only: [:id, :formatted_address]}}}})
 	end  
 
