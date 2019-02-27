@@ -37,6 +37,16 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  
+  config.action_mailer.smtp_settings = {
+    :address => "email-smtp.us-east-1.amazonaws.com",
+    :port => 587,
+    :user_name => "AKIAIOOOW52WL4KFSL3Q", #Your SMTP user
+    :password => "BEqoiX6WhqR91By8R9Y+5EkGFN6AWEiL1SVO4TNjVgeU", #Your SMTP password
+    :authentication => :login,
+    :enable_starttls_auto => true
+  }
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
