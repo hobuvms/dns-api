@@ -8,10 +8,10 @@
     </div>
 </div>
 <div style="padding:0px 30px">
-    <div style="margin-top:30px;font-size:19px;font-weight:600">Hi John</div>
+    <div style="margin-top:30px;font-size:19px;font-weight:600">Hi <%= @name %></div>
     <br>
     <div style="font-size:15px">
-        Thanks for visiting <a href="http://dealsandservices.com" target="_blank">dealsandservices.com</a>!
+        Thank you for getting started with us! Our team at  <a href="http://dealsandservices.com" target="_blank">dealsandservices.com</a>! appreciates your vote of confidence and we will try our best to create a pristine experience for you.
     </div>
     <div style="margin:30px 0">
         <div style="font-weight:800;font-size:18px;margin-bottom:5px">Your Info?</div>
@@ -30,21 +30,10 @@
                 <div style="margin:8px 0;font-size:15px">
                     Address: <span><%= @address %></span>
                 </div>
-                <div style="margin:8px 0;font-size:15px">
-                    Preferred Time: <span>3PM - 4PM</span>
-                </div>
             </div>
             <div style="margin:15px 0">
-                <div style="font-style:italic;font-weight:600;padding-left:16px;border-left:5px solid #ccc">Internet Details</div>
-                <div style="margin:8px 0;font-size:15px">
-                    Downloadable Speed: <span>70mbps</span>
-                </div>
-                <div style="margin:8px 0;font-size:15px">
-                    Upload Speed: <span>70mbps</span>
-                </div>
-                <div style="margin:8px 0;font-size:15px">
-                    Usage: <span>Less than 300 GB</span>
-                </div>
+                <div style="font-style:italic;font-weight:600;padding-left:16px;border-left:5px solid #ccc">Order Details</div>
+                <p><%= @notes.html_safe %></p>
             </div>
         </div>
     </div>

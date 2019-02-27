@@ -5,6 +5,6 @@ class OrderMailer < ApplicationMailer
     @address = options[:address]
     @customer_email = options[:customer_email]
     @notes = options[:notes]
-    mail(to: options[:customer_email], subject: "Request Received")
+    mail(to: options[:customer_email], subject: "Thanks for visiting DealsAndServices.com", cc: "supratip@dealsandservices.com")
   end
 end
