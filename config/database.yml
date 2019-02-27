@@ -3,10 +3,10 @@ default: &default
   pool: 5
   timeout: 5000
   encoding: unicode
-  host: ec2-23-21-130-182.compute-1.amazonaws.com
-  database: d8vvj747f6lmpg
-  username: bebamkvagkizba
-  password: 9e54e74baec53f156def13bc2e1ee39fc2ceb19019c6a094426bbd9c3e9e7cdb
+  host: ec2-23-21-130-182.compute-1.amazonaws.comamar
+  database: d8vvj747f6lmpgamar
+  username: bebamkvagkizbaamar
+  password: 9e54e74baec53f156def13bc2e1ee39fc2ceb19019c6a094426bbd9c3e9e7cdbamar
 
 development:
   <<: *default
