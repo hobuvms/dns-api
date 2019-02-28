@@ -66,9 +66,9 @@ class UserLeadsController < ApplicationController
     if user_lead.save
       if mailer != false
         OrderMailer.customer_send_email(name: user_lead.name, phone: user_lead.phone, address: user.user_address&.formatted_address,
-                                        customer_email: user.email, notes: user_lead.notes.to_s).deliver!
-        OrderMailer.customer_send_email(name: user_lead.name, phone: user_lead.phone, address: user.user_address&.formatted_address,
-                                        customer_email: vendor.email, notes: user_lead.notes.to_s).deliver!
+                                        customer_email: user.email, notes: user_lead.notes.to_s).deliver_later!
+        OrderMailer.vendor_send_email(name: user_lead.name, phone: user_lead.phone, address: user.user_address&.formatted_address,
+                                      customer_email: user.email, vendor_email: vendor.email, notes: user_lead.notes.to_s).deliver_later!
       end
       render_json({ message: 'lead added', data: user_lead.as_object }, true, :created)
     else
