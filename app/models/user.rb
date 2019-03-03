@@ -26,17 +26,15 @@ class User < ApplicationRecord
     update_attributes(referral_code: code+id.to_s)
   end
 
-  def self.to_csv
-    attributes = ["id", "name", "company_name", "medium", "price", "first_contact_date", "last_updated", "customer_name", "status", "formatted_address", "unit", "city", "postal_code", "phone_number", "internet", "tv", "homephone", "shm", "account_number", "working_order", "installation", "installation_time", "activated", "details", "expiry_date"]
+  def self.to_csv(params)
+    obj_attributes = ["company_name", "medium", "order_company_name", "price", "first_contact_date", 'last_updated', "customer_name", "status", "formatted_address", "unit", "city", "postal_code", "phone_number", "tv", "internet", "homephone", "shm", 'name', "account_number", "working_order", "installation", "installation_time", "activated", 'rep_name', "details", "expiry_date"]
 
     head_attributes = ["Service Company", "Medium", "Company", "Price", "First Contact Date (system)", "Latest Date Updated (system)", "Customer Name", "PROGRESS STATUS", "Street Address", "Unit", "City", "Postal Code", "Contact Phone", "TV Sale", "Int Sale", "HP Sale", "SHM", "Rep Name", "Account #", "Work Order #", "Install Date", "Install Time", "Activated", "Rep Paid", "Comments DETAILS", "EXPIRY"]
 
-    CSV.generate(headers: true) do |csv|
+    data = CSV.generate(headers: true) do |csv|
       csv << head_attributes
 
-      all.each do |user|
-        csv << attributes.map{ |attr| user.send(attr) }
-      end
+      csv << obj_attributes.map{ |attr| params[attr].to_s }
     end
   end
 end
