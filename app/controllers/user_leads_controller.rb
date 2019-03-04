@@ -31,7 +31,7 @@ class UserLeadsController < ApplicationController
 
   def create
     if user_lead_params[:referral_code].present?
-      vendor = Vendor.find_by(referral_code: user_lead_params[:referral_code])
+      vendor = Vendor.where(Vendor.arel_table[:referral_code].matches(user_lead_params[:referral_code]))
       return render_json({ message: 'Referral Code Invalid.' }, false, :unprocessable_entity) if vendor.blank?
     else
       vendor = Vendor.find_by(referral_code: :hobuadmin)
