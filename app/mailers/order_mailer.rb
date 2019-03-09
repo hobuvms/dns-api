@@ -16,6 +16,11 @@ class OrderMailer < ApplicationMailer
     @vendor_email = options[:vendor_email]
     @notes = options[:notes]
     mail(to: options[:vendor_email], subject: 'Customer Request From Deals And Services', bcc: 'supratip@dealsandservices.com',
-         from: 'sales@dealsandservices.com')
+         from: 'DealsAndServices<sales@dealsandservices.com>')
+  end
+
+  def reset_password(email:, token:)
+    @token = token
+    mail(to: email, subject: 'DealsAndServices.com: Reset Password')
   end
 end

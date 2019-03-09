@@ -52,7 +52,7 @@ class UsersController < ApplicationController
     user = User.find_by_verification_token(params[:verification_token])
     return render_json({ message: 'Wrong Token or Token Expired' }, false, 404) if user.blank?
 
-    user.change_password(params[:new_password])
+    user.change_password(password: params[:new_password])
     render_json({ message: 'Password Changed.' }, true, 200)
   end
 
@@ -63,7 +63,7 @@ class UsersController < ApplicationController
     return render_json({ message: 'Email not Exist' }, false, 404) if user.blank?
 
     user.reset_password
-    render_json({ message: 'Reset Password Link Sent.' }, true, 200)
+    render_json({ message: 'Reset Password Link Sent.' })
   end
 
   private

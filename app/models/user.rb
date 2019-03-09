@@ -10,6 +10,10 @@ class User < ApplicationRecord
   has_many :orders, foreign_key: :vendor_id
   has_many :user_leads, foreign_key: :vendor_id
 
+  before_create do
+    self.verification_token = generate_verification_token
+  end
+
   has_one :user_address
 
   accepts_nested_attributes_for :user_address
@@ -21,7 +25,7 @@ class User < ApplicationRecord
   def generate_referral_code
     return if referral_code.present?
 
-    code = email.split(/\W+/).first
+    code = email.split(/\W+/).first.to_s[0...5]
     code = email.split(/\W+/).join[0...5] if code.blank? || code.to_s.length < 5
     update_attributes(referral_code: code+id.to_s)
   end
@@ -37,4 +41,17 @@ class User < ApplicationRecord
       csv << obj_attributes.map{ |attr| params[attr].to_s }
     end
   end
+
+  def reset_password
+    OrderMailer.reset_password(email: email, token: verification_token).deliver_later!
+  end
+
+  def change_password(password:)
+    update_attributes(password: password, verification_token: generate_verification_token)
+  end
+
+  def generate_verification_token
+    SecureRandom.alphanumeric(10) + Time.now.to_i.to_s
+  end
+
 end
