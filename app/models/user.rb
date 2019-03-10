@@ -32,9 +32,9 @@ class User < ApplicationRecord
   end
 
   def self.to_csv(params)
-    obj_attributes = ["company_name", "medium", "order_company_name", "price", "first_contact_date", 'last_updated', "customer_name", "status", "formatted_address", "unit", "city", "postal_code", "phone_number", "tv", "internet", "homephone", "shm", 'name', "account_number", "working_order", "installation", "installation_time", "activated", 'rep_name', "details", "expiry_date"]
+    obj_attributes = ["company_name", 'referral_code', "medium", "order_company_name", "price", "first_contact_date", 'last_updated', "customer_name", "status", "formatted_address", "unit", "city", "postal_code", "phone_number", "tv", "internet", "homephone", "shm", 'rep_name', "account_number", "working_order", "installation", "installation_time", "activated", 'rep_paid', "details", "expiry_date"]
 
-    head_attributes = ["Service Company", "Medium", "Company", "Price", "First Contact Date (system)", "Latest Date Updated (system)", "Customer Name", "PROGRESS STATUS", "Street Address", "Unit", "City", "Postal Code", "Contact Phone", "TV Sale", "Int Sale", "HP Sale", "SHM", "Rep Name", "Account #", "Work Order #", "Install Date", "Install Time", "Activated", "Rep Paid", "Comments DETAILS", "EXPIRY"]
+    head_attributes = ["Service Company", "Referral Code", "Medium", "Company", "Price", "First Contact Date (system)", "Latest Date Updated (system)", "Customer Name", "PROGRESS STATUS", "Street Address", "Unit", "City", "Postal Code", "Contact Phone", "TV Sale", "Int Sale", "HP Sale", "SHM", "Rep Name", "Account #", "Work Order #", "Install Date", "Install Time", "Activated", "Rep Paid", "Comments DETAILS", "EXPIRY"]
 
     data = CSV.generate(headers: true) do |csv|
       csv << head_attributes
