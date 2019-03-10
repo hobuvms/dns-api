@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  root :to => 'welcomes#index'
   resources :orders, only: %i[create index update] do
     member do
       get :customer_orders
     end
   end
+  resources :welcomes, only: %i[index]
   resources :user_addresses, only: %i[create update]
   resources :user_leads, only: %i[index create update] do
     collection do
