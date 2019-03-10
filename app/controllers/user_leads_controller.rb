@@ -26,7 +26,7 @@ class UserLeadsController < ApplicationController
     end
 
     respond_to do |format|
-      format.csv { send_data User.to_csv(d.uniq{|x| x.order_iid})}, filename: "users-#{Date.today}.csv" }
+      format.csv { send_data User.to_csv(d.uniq{|x| x.order_iid}), filename: "users-#{Date.today}.csv" }
     end
 
   end
