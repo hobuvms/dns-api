@@ -39,7 +39,11 @@ class User < ApplicationRecord
     data = CSV.generate(headers: true) do |csv|
       csv << head_attributes
 
-      csv << obj_attributes.map{ |attr| params[attr].to_s }
+      params.each do |param|
+        csv << obj_attributes.map{ |attr|
+          param[attr].to_s
+        }
+      end
     end
   end
 
