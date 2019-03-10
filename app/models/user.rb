@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :user_leads, foreign_key: :vendor_id
 
   before_create do
+    self.email = self.email.to_s.downcase
     self.verification_token = generate_verification_token
   end
 
