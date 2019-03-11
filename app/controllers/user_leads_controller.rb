@@ -13,9 +13,9 @@ class UserLeadsController < ApplicationController
   end
 
   def report
-    d = Vendor.joins('left join user_leads on user_leads.vendor_id = users.id left join orders on orders.vendor_id = users.id left join users customer on customer.id = user_leads.user_id left join user_addresses on customer.id = user_addresses.user_id').
-              select("users.company_name Company_Name, user_leads.medium MEDIUM, orders.price PRICE, user_leads.created_at as FIRST_CONTACT_DATE, user_leads.updated_at LAST_UPDATED, user_leads.name CUSTOMER_NAME, orders.status, formatted_address, 1 as UNIT, city, postal_code, user_leads.phone PHONE_NUMBER, (product_id/1000) Internet, (product_id/100)%10 TV, (product_id/10)%10 HomePhone, (product_id%10) SHM, users.name, account_number, working_order, installation, orders.id order_iid, orders.installation_time, CASE WHEN status = \'installed\' THEN \'YES\' ELSE \'NO\' END AS Activated, users.name as rep_name, orders.details, DATE(expiry_date) expiry_date, orders.company_name order_company_name, users.referral_code referral_code, 0 rep_paid").
-              where('users.id = ?', current_vendor.id)
+    d = Vendor.joins(:user_leads=>:orders)
+              .joins('inner join users customer on customer.id = user_leads.user_id inner join user_addresses on customer.id = user_addresses.user_id').where('users.id = ?', current_vendor.id)
+              .select("users.company_name Company_Name, user_leads.medium MEDIUM, orders.price PRICE, user_leads.created_at as FIRST_CONTACT_DATE, user_leads.updated_at LAST_UPDATED, user_leads.name CUSTOMER_NAME, orders.status, formatted_address, 1 as UNIT, city, postal_code, user_leads.phone PHONE_NUMBER, (product_id/1000) Internet, (product_id/100)%10 TV, (product_id/10)%10 HomePhone, (product_id%10) SHM, users.name, account_number, working_order, installation, orders.id order_iid, orders.installation_time, CASE WHEN status = \'installed\' THEN \'YES\' ELSE \'NO\' END AS Activated, users.name as rep_name, orders.details, DATE(expiry_date) expiry_date, orders.company_name order_company_name, users.referral_code referral_code, 0 rep_paid")
 
     if params[:from_date].present?
       d = d.where('user_leads.updated_at > ?', Time.parse(params[:from_date]).beginning_of_day )
