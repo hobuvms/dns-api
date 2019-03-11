@@ -41,9 +41,17 @@ class User < ApplicationRecord
 
       params.each do |param|
         csv << obj_attributes.map{ |attr|
-          param[attr].to_s
+          parse_data(param[attr]).to_s
         }
       end
+    end
+  end
+
+  def parse_data(data)
+    if data.is_a? Time
+      data.in_time_zone("Eastern Time (US & Canada)").to_date
+    else
+      data
     end
   end
 
