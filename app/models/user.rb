@@ -47,7 +47,7 @@ class User < ApplicationRecord
     end
   end
 
-  def parse_data(data)
+  def self.parse_data(data)
     if data.is_a? Time
       data.in_time_zone("Eastern Time (US & Canada)").to_date
     else
