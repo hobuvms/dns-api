@@ -23,4 +23,9 @@ class OrderMailer < ApplicationMailer
     @token = token
     mail(to: email, subject: 'DealsAndServices.com: Reset Password')
   end
+
+  def contact_us(message)
+    @message = message
+    mail(to: 'supratip@dealsandservices.com', subject: 'Contact Us: Request')
+  end
 end

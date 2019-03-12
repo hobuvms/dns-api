@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       get :customer_orders
     end
   end
+  resources :contacts, only: %i[create]
   resources :welcomes, only: %i[index]
   resources :user_addresses, only: %i[create update]
   resources :user_leads, only: %i[index create update] do
