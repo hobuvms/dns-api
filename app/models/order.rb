@@ -5,7 +5,7 @@ class Order < ApplicationRecord
   validates_presence_of :user_lead_id, :vendor_id, :product_id
   has_paper_trail
 
-  before_save :touch_user_lead
+  # before_save :touch_user_lead
 
   def as_object
     as_json(only: %i[id product_id account_number taxed status working_order company_name price installation installation_time expiry_date details
