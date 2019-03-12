@@ -8,7 +8,7 @@ class UserLeadsController < ApplicationController
   def index
     @user_leads = current_vendor.user_leads.includes(:user).as_json(only: %i[id medium notes name phone created_at updated_at],
                                                                     include: {user: {only: %i[id email] , include: {user_address: {only: [:id, :formatted_address]}}}})
-                                                           .order('user_leads.name asc')
+                                                           .sort_by{|x| x[:name]}.reverse
 
     render json: @user_leads
   end
