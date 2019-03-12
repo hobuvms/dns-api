@@ -78,6 +78,15 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
+   config.action_mailer.smtp_settings = {
+    :address => "email-smtp.us-east-1.amazonaws.com",
+    :port => 587,
+    :user_name => "AKIAIOOOW52WL4KFSL3Q", #Your SMTP user
+    :password => "BEqoiX6WhqR91By8R9Y+5EkGFN6AWEiL1SVO4TNjVgeU", #Your SMTP password
+    :authentication => :login,
+    :enable_starttls_auto => true
+  }
+
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
