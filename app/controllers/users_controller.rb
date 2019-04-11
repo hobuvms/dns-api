@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     if @user.save
       auth = authenticate(params[:email], params[:password])
       # Send Mailer
-      OrderMailer.vendor_sign_up(email: params[:email], name: @user.name, company: company_name,
+      OrderMailer.vendor_sign_up(email: params[:email], name: @user.name, company: @user.company_name,
                                  referral: @user.referral_code, phone: @user.phone,
                                  location: @user.user_address&.formatted_address
                                 ).deliver_later!
