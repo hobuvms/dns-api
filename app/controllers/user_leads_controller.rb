@@ -20,11 +20,11 @@ class UserLeadsController < ApplicationController
               .order('orders.updated_at desc')
 
     if params[:from_date].present?
-      d = d.where('orders.updated_at > ?', Time.parse(params[:from_date]).beginning_of_day )
+      d = d.where('orders.updated_at >= ?', Time.parse(params[:from_date]).beginning_of_day )
     end
 
     if params[:to_date].present?
-      d = d.where('orders.updated_at < ?', Time.parse(params[:to_date]).end_of_day )
+      d = d.where('orders.updated_at <= ?', Time.parse(params[:to_date]).end_of_day )
     end
 
     respond_to do |format|
