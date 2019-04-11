@@ -28,7 +28,7 @@ class UsersController < ApplicationController
       OrderMailer.vendor_sign_up(email: params[:email], name: @user.name, company: @user.company_name,
                                  referral: @user.referral_code, phone: @user.phone,
                                  location: @user.user_address&.formatted_address
-                                ).deliver_later!
+                                ).deliver_now!
       response = { message: 'User created successfully' }.merge parse_user_detail(auth)
       render_json(response, true, :created)
     else
