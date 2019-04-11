@@ -24,6 +24,11 @@ class UsersController < ApplicationController
     @user = User.new(user_params.merge(role: :vendor))
     if @user.save
       auth = authenticate(params[:email], params[:password])
+      # Send Mailer
+      OrderMailer.vendor_sign_up(email: params[:email], name: @user.name, company: company_name,
+                                 referral: @user.referral_code, phone: @user.phone,
+                                 location: @user.user_address&.formatted_address
+                                ).deliver_later!
       response = { message: 'User created successfully' }.merge parse_user_detail(auth)
       render_json(response, true, :created)
     else

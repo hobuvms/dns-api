@@ -1,4 +1,15 @@
 class OrderMailer < ApplicationMailer
+
+  def vendor_sign_up(name:, email:, phone:, location:, company:, referral:)
+    @name = name
+    @email = email
+    @phone = phone
+    @location = location
+    @company = company
+    @referral = referral
+    mail(subject: 'New Vendor Sign-up DealsAndServices.com', to: 'supratip@dealsandservices.com')
+  end
+
   def customer_send_email(options={})
     @name = options[:name]
     @phone = options[:phone]
