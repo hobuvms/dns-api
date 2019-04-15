@@ -1,0 +1,10 @@
+<p>Hello <%=@user.name || 'Vendor'%>,</p>
+<p>Your sign-in URL : <a target="_blank" href='https://www.dealsandservices.com/saleshub'>www.dealsandservices.com/saleshub</a></p>
+<p>Username: <%= @user.email%></p>
+<p>Date of joining: <%= Time.now.to_date %></p>
+<p>Referral code : <%= @user.referral_code%></p>
+<p></p>
+<p>Now it's your chance to make business through Deals and Services. Contact your service company to know more details.</p>
+<p></p>
+<p>Thank you,</p>
+<p>DealsandServices.com</p>

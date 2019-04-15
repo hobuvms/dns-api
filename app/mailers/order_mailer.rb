@@ -30,6 +30,12 @@ class OrderMailer < ApplicationMailer
          from: 'DealsAndServices<sales@dealsandservices.com>')
   end
 
+  def welcome_vendor(user_id:)
+    @user = User.find_by(id: user_id)
+    raise 'User not found' if @user.nil?
+    mail(subject: 'Congratulations for joining DealsAndServices', to: @user.email)
+  end
+
   def reset_password(email:, token:)
     @token = token
     mail(to: email, subject: 'DealsAndServices.com: Reset Password')

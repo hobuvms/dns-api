@@ -39,14 +39,7 @@ Rails.application.configure do
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
-  config.action_mailer.smtp_settings = {
-    :address => "email-smtp.us-east-1.amazonaws.com",
-    :port => 587,
-    :user_name => "AKIAIOOOW52WL4KFSL3Q", #Your SMTP user
-    :password => "BEqoiX6WhqR91By8R9Y+5EkGFN6AWEiL1SVO4TNjVgeU", #Your SMTP password
-    :authentication => :login,
-    :enable_starttls_auto => true
-  }
+  config.action_mailer.smtp_settings = { :address => '127.0.0.1', :port => 1025 }
 
 
   # Raises error for missing translations
