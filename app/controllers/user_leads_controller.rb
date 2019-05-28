@@ -6,9 +6,11 @@ class UserLeadsController < ApplicationController
   skip_before_action :authenticate_request, only: [:create]
 
   def index
-    @user_leads = current_vendor.user_leads.includes(:user).as_json(only: %i[id medium notes name phone created_at updated_at],
-                                                                    include: {user: {only: %i[id email] , include: {user_address: {only: [:id, :formatted_address]}}}})
-                                                           .sort_by{|x| x[:name]}.reverse
+    @user_leads = current_vendor.user_leads.includes(user: :user_address)
+                                           .as_json(only: %i[id medium notes name phone created_at updated_at],
+                                                    include: {user: {only: %i[id email],
+                                                                     include: {user_address: {only: %i[id formatted_address]}}}})
+                                           .sort_by{|x| x[:name]}.reverse
 
     render json: @user_leads
   end
