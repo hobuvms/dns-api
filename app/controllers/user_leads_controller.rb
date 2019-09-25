@@ -7,7 +7,8 @@ class UserLeadsController < ApplicationController
 
   def index
     @user_leads = current_vendor.user_leads.includes(user: :user_address).order(created_at: :desc)
-                                           .as_json(only: %i[id medium notes name phone created_at updated_at],
+    @user_leads = @user_leads.where('phone ilike :query or name ilike :query', query: "%#{params[:keyword]}%") if params[:keyword].present?
+    @user_leads = @user_leads.as_json(only: %i[id medium notes name phone created_at updated_at],
                                                     include: {user: {only: %i[id email],
                                                                      include: {user_address: {only: %i[id formatted_address]}}}})
                                            # .sort_by{|x| x[:created_at]}.reverse
